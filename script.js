@@ -4,7 +4,7 @@
 // green : char - OK / Position - OK
 // check if input word is in dictionary : 5 char word asset file - maybe Next...
 
-//23.02.22  
+//23.02.22 wordle
 //0. User input -> capital
 //1. Next Line - disabled -> enable
 //2. You win / game over / Reset / restart
@@ -41,8 +41,8 @@ function readAnswerFile(path) {
     }
 
     let randomNumber = Math.floor(Math.random(answer) * answerList.length);
-    answer = answerList[randomNumber]; 
-    console.log("answer is "+ answer);
+    answer = answerList[randomNumber];
+    console.log("answer is " + answer);
   };
   xhr.send();
 }
@@ -59,16 +59,16 @@ function reset() {
       const ch = [];
       ch[i] = document.getElementById("ch" + k + i);
       ch[i].disabled = true;
-      ch[i].value ="";
+      ch[i].value = "";
       ch[i].style.color = "black";
     }
   }
 
   //randomNumber()
   let randomNumber = Math.floor(Math.random(answer) * answerList.length);
-  answer = answerList[randomNumber]; 
-  console.log("answer is "+ answer);
-  
+  answer = answerList[randomNumber];
+  console.log("answer is " + answer);
+
   EnterButton.value = "ENTER";
   openLine(1);
 }
@@ -93,20 +93,19 @@ function closeLine(number) {
 //this fucntion get UserAnswer as input
 //if UserAnswer is in answerList, return true;
 //if Not, return false
-function CheckWordInAnswerList(UserAnswer){
+function CheckWordInAnswerList(UserAnswer) {
   let bResult = false;
-  for(let i=0;i<answerList.length ;i++)
-  {
-      if(UserAnswer == answerList[i]){
-        bResult = true;
-        break;
-      }
+  for (let i = 0; i < answerList.length; i++) {
+    if (UserAnswer == answerList[i]) {
+      bResult = true;
+      break;
+    }
   }
-  
-  if(bResult==true){
+
+  if (bResult == true) {
     return true;
   }
-  else{
+  else {
     return false;
   }
 }
@@ -118,7 +117,7 @@ function CheckWord() {
     reset();
     return;
   }
-  
+
   if (trialCount >= 7) { //Game over
     console.log("Game Over... No more chance");
     reset();
@@ -133,11 +132,11 @@ function CheckWord() {
   ch[3] = document.getElementById("ch" + trialCount + "4");
   ch[4] = document.getElementById("ch" + trialCount + "5");
 
-  let UserAnswer = ch[0].value+ ch[1].value +ch[2].value + ch[3].value + ch[4].value;
-  console.log("USER ANSWER = "+UserAnswer.toLowerCase());
+  let UserAnswer = ch[0].value + ch[1].value + ch[2].value + ch[3].value + ch[4].value;
+  console.log("USER ANSWER = " + UserAnswer.toLowerCase());
   //Check serAnswer is in answerList
   let ValidCheck = CheckWordInAnswerList(UserAnswer.toLowerCase());
-  if(ValidCheck == false) //if word is not in answerlist
+  if (ValidCheck == false) //if word is not in answerlist
   {
     console.log("word is not in the answer list.");
     alert("Not in word list");
@@ -145,31 +144,25 @@ function CheckWord() {
   }
 
   //Make All black
-  for (let k = 0; k < 5; k++) 
-  {
-    ch[k].style.color = "black";  
+  for (let k = 0; k < 5; k++) {
+    ch[k].style.color = "black";
   }
-  
+
   //Green First
   for (let k = 0; k < 5; k++) {
-    if (ch[k].value.toLowerCase() == answer[k]) 
-    {
+    if (ch[k].value.toLowerCase() == answer[k]) {
       greenCount++;
       ch[k].style.color = "green";
     }
   }
-  
+
   //check yellow
-  for (let k = 0; k < 5; k++) 
-  {
-    if(ch[k].style.color != "green")
-    {
+  for (let k = 0; k < 5; k++) {
+    if (ch[k].style.color != "green") {
       for (let i = 0; i < 5; i++) //for i in range 5:  <- python
       {
-        if(ch[i].style.color == "black")
-        {
-          if (ch[k].value.toLowerCase() == answer[i]) 
-          {
+        if (ch[i].style.color == "black") {
+          if (ch[k].value.toLowerCase() == answer[i]) {
             ch[k].style.color = "yellow";
             break;
           }
@@ -183,15 +176,13 @@ function CheckWord() {
   closeLine(trialCount - 1);
 
 
-  if (greenCount == 5) 
-  {
+  if (greenCount == 5) {
     bUserWin = true;
     console.log("You win");
     youWin.style.visibility = "visible";
     EnterButton.value = "Restart";
   }
-  else 
-  {
+  else {
     if (trialCount < 7) {
       openLine(trialCount);
     }
