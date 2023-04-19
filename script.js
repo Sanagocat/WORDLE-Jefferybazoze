@@ -4,7 +4,7 @@
 // green : char - OK / Position - OK
 // check if input word is in dictionary : 5 char word asset file - maybe Next...
 
-//23.02.22
+//23.02.22  
 //0. User input -> capital
 //1. Next Line - disabled -> enable
 //2. You win / game over / Reset / restart
